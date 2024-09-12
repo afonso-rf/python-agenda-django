@@ -8,12 +8,15 @@ from django.utils import timezone
 # category (foreign key), show (boolean), owner (foreign key)
 class Contact(models.Model):
     first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=250)
+    last_name = models.CharField(max_length=250, blank=True)
     phone = models.CharField(max_length=100)
     email = models.EmailField(max_length=250, blank=True)
     # category = ...
     description = models.TextField(blank=True)
     # show = ...
     # owner = ...
-    created_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(default=timezone.now,)
     updated_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self) -> str:
+        return f"{self.first_name} {self.last_name}"
