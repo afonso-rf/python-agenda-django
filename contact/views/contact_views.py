@@ -8,7 +8,7 @@ def index(request):
     contacts = Contact.objects.filter(show=True).order_by("-id")
 
     context = {
-        "title": "",
+        "site_title": "Contatos - ",
         "contacts": contacts,
     }
 
@@ -25,9 +25,10 @@ def contact(request, contact_id):
         pk=contact_id,
         show=True,
     )
-
+    site_title = f"{sigle_contact.first_name} {sigle_contact.last_name} - "
+    
     context = {
-        "title": "Contact - ",
+        "site_title": site_title,
         "contact": sigle_contact,
     }
 
