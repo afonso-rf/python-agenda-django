@@ -35,9 +35,9 @@ if __name__ == "__main__":
     django_contacts = []
     for _ in range(NUMBER_OF_OBJECTS):
         profile = fake.profile()
-        email: str = profile["mail"]
         first_name, last_name = profile["name"].split(" ", 1)
         phone: str = fake.phone_number()
+        email: str = profile["mail"]
         created_date: datetime = fake.date_this_year()
         description = fake.text(max_nb_chars=200)
         category = choice(django_categories)
@@ -47,6 +47,7 @@ if __name__ == "__main__":
                 first_name=first_name,
                 last_name=last_name,
                 phone=phone,
+                email=email,
                 created_date=created_date,
                 description=description,
                 category=category,
