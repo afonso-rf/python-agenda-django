@@ -6,11 +6,19 @@
 
     <form action="{% url 'contact:create' %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
+
       <div class="form-content">
-        <div class="form-group">
-          <label for="id_first_name">LABEL</label>
-          <input type="text" name="first_name" id="id_first_name" maxlength="255" />
-        </div>
+        {% for field in forms %}
+          <div class="form-group">
+            <label for="{{ field.id_for_label }}"><b>{{ field.label }}</b></label>
+            {{ field }}
+            {{ field.errors }}
+
+            {% if field.help_text %}
+              <span class="help-text">{{ field.help_text }}</span>
+            {% endif %}
+          </div>
+        {% endfor %}
       </div>
 
       <div class="form-content">
