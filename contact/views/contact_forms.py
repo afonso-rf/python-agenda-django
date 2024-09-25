@@ -1,7 +1,6 @@
 from django.shortcuts import render
 
 from contact.forms import ContactForm
-from contact.models import Contact
 
 
 def create(request):
