@@ -18,6 +18,11 @@
               <span class="help-text">{{ field.help_text }}</span>
             {% endif %}
           </div>
+          {% if field.name == 'picture' and field.value.url %}
+            <div>
+              <img src="{{ field.value.url }}" alt="" />
+            </div>
+          {% endif %}
         {% endfor %}
       </div>
 

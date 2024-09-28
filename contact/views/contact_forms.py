@@ -9,7 +9,7 @@ def create(request):
     form_action = reverse("contact:create")
 
     if request.method == "POST":
-        forms = ContactForm(request.POST)
+        forms = ContactForm(request.POST, request.FILES)
         context = {
             "site_title": "Create contact - ",
             "forms": forms,
@@ -45,7 +45,7 @@ def update(request, contact_id):
     form_action = reverse("contact:update", args=(contact_id,))
 
     if request.method == "POST":
-        forms = ContactForm(request.POST, instance=contact)
+        forms = ContactForm(request.POST, request.FILES, instance=contact)
         context = {
             "site_title": "Update contact - ",
             "forms": forms,
@@ -78,16 +78,16 @@ def update(request, contact_id):
 def delete(request, contact_id):
     contact, *_ = get_list_or_404(Contact, pk=contact_id, show=True)
     confirmation = request.POST.get("confirmation", "no")
-    
+
     if confirmation == "yes":
         contact.delete()
         return redirect("contact:index")
-        
+
     return render(
         request=request,
         template_name="contact/contact.html",
         context={
-            'contact': contact,
+            "contact": contact,
             "confirmation": confirmation,
         },
     )

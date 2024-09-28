@@ -4,24 +4,13 @@ from contact.models import Contact
 
 
 class ContactForm(forms.ModelForm):
-    first_name = forms.CharField(
-        widget=forms.TextInput(attrs={"placeholder": "Aqui veio do init"}),
-        label="Primeiro nome",
-        help_text="Texto para ajudar o usuario",
+    picture = forms.ImageField(
+        widget=forms.FileInput(
+            attrs={
+                "accept": "image/*",
+            }
+        ),
     )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        # self.fields["first_name"].widget.attrs.update(
-        #     {"placeholder": "Veio do init"}
-        # )
-        # self.fields["phone"].widget.attrs.update(
-        #     {
-        #         "pattern": "([0-9]{2}) [0-9]{4}-[0-9]{4}",
-        #         "placeholder": "(XX) XXXX-XXXX",
-        #     }
-        # )
 
     class Meta:
         model = Contact
@@ -32,15 +21,8 @@ class ContactForm(forms.ModelForm):
             "email",
             "description",
             "category",
+            "picture",
         )
-
-        # widgets = {
-        #     "first_name": forms.TextInput(
-        #         attrs={
-        #             "placeholder": "Primeiro nome",
-        #         }
-        #     ),
-        # }
 
     def clean(self):
         cleaned_data = self.cleaned_data
