@@ -9,15 +9,15 @@ def create(request):
     form_action = reverse("contact:create")
 
     if request.method == "POST":
-        forms = ContactForm(request.POST, request.FILES)
+        form = ContactForm(request.POST, request.FILES)
         context = {
             "site_title": "Create contact - ",
-            "forms": forms,
+            "form": form,
             "form_action": form_action,
         }
 
-        if forms.is_valid():
-            contact = forms.save()
+        if form.is_valid():
+            contact = form.save()
             return redirect("contact:update", contact_id=contact.pk)
 
         return render(
@@ -28,7 +28,7 @@ def create(request):
 
     context = {
         "site_title": "Create Contact - ",
-        "forms": ContactForm(),
+        "form": ContactForm(),
         "form_action": form_action,
     }
 
@@ -45,15 +45,15 @@ def update(request, contact_id):
     form_action = reverse("contact:update", args=(contact_id,))
 
     if request.method == "POST":
-        forms = ContactForm(request.POST, request.FILES, instance=contact)
+        form = ContactForm(request.POST, request.FILES, instance=contact)
         context = {
             "site_title": "Update contact - ",
-            "forms": forms,
+            "form": form,
             "form_action": form_action,
         }
 
-        if forms.is_valid():
-            contact = forms.save()
+        if form.is_valid():
+            contact = form.save()
             return redirect("contact:update", contact_id=contact.pk)
 
         return render(
@@ -64,7 +64,7 @@ def update(request, contact_id):
 
     context = {
         "site_title": "Update Contact - ",
-        "forms": ContactForm(instance=contact),
+        "form": ContactForm(instance=contact),
         "form_action": form_action,
     }
 
