@@ -2,9 +2,7 @@
 
 {% block content %}
   <div class="sigle-contact">
-    <h1 class="sigle-contact-name">
-      {{ contact.first_name }} {{ contact.last_name }}
-    </h1>
+    <h1 class="sigle-contact-name">{{ contact.first_name }} {{ contact.last_name }}</h1>
     <p>
       <b>ID:</b> {{ contact.id }}
     </p>
@@ -23,5 +21,20 @@
     <p>
       <b>Date Created:</b> {{ contact.created_date }}
     </p>
+    <div class="contact-links">
+      <a class="btn btn-link" href="{% url 'contact:update' contact.id %}">Update</a>
+
+      <form action="{% url 'contact:delete' contact.id %}" method="POST">
+        {% csrf_token %}
+        {% if confirmation == 'no' %}
+          <input type="hidden" name="confirmation" value="yes" />
+          <button class="btn btn-link btn-delete" type="submit">Confirma?</button>
+        </form>
+          <a class="btn btn-link" href="{% url 'contact:contact' contact.id %}">Cancela</a>
+        {% else %}
+          <button class="btn btn-link btn-delete" type="submit">Delete</button>
+        </form>
+        {% endif %}
+    </div>
   </div>
 {% endblock %}

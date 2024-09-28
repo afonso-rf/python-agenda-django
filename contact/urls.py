@@ -12,4 +12,5 @@ urlpatterns = [
     path(route="contact/create/", view=views.create, name="create"),
     path(route="contact/<int:contact_id>/", view=views.contact, name="contact"),
     path(route="contact/<int:contact_id>/update/", view=views.update, name="update"),
+    path(route="contact/<int:contact_id>/delete/", view=views.delete, name="delete"),
 ]

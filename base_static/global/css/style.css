@@ -315,3 +315,23 @@ svg {
     filter: brightness(80%);
     box-shadow: 0 0 5px var(--link-dark-color);
 }
+
+.contact-links {
+    margin-block: calc(var(--small-font-size) * 2);
+    display: flex;
+    gap: 0 var(--spacing);
+    align-items: center;
+}
+
+.btn-link {
+    display: block;
+    padding: 1rem;
+    font-size: var(--small-font-size);
+    text-decoration: none;
+    font-weight: bold;
+    line-height: var(--small-font-size);
+}
+
+.btn-delete {
+    background: tomato;
+}

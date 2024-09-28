@@ -41,9 +41,9 @@ def create(request):
 
 def update(request, contact_id):
     contact, *_ = get_list_or_404(Contact.objects, pk=contact_id, show=True)
-    
+
     form_action = reverse("contact:update", args=(contact_id,))
-    
+
     if request.method == "POST":
         forms = ContactForm(request.POST, instance=contact)
         context = {
@@ -72,4 +72,22 @@ def update(request, contact_id):
         request=request,
         template_name="contact/create.html",
         context=context,
+    )
+
+
+def delete(request, contact_id):
+    contact, *_ = get_list_or_404(Contact, pk=contact_id, show=True)
+    confirmation = request.POST.get("confirmation", "no")
+    
+    if confirmation == "yes":
+        contact.delete()
+        return redirect("contact:index")
+        
+    return render(
+        request=request,
+        template_name="contact/contact.html",
+        context={
+            'contact': contact,
+            "confirmation": confirmation,
+        },
     )
