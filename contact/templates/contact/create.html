@@ -20,7 +20,7 @@
           </div>
           {% if field.name == 'picture' and field.value.url %}
             <div>
-              <img src="{{ field.value.url }}" alt="" />
+              <img src="{{ field.value.url }}" alt="{{ forms.first_name.value }} {{ forms.last_name.value }}" />
             </div>
           {% endif %}
         {% endfor %}
