@@ -18,5 +18,5 @@ urlpatterns = [
     path(route="user/create/", view=views.register, name="register"),
     path(route="user/login/", view=views.login_view, name="login"),
     path(route="user/logout/", view=views.logout_view, name="logout"),
-    
+    path(route="user/update/", view=views.user_update, name="user_update"),
 ]
